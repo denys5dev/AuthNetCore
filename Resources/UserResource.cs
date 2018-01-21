@@ -1,17 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AuthNetCore.Models
+namespace AuthNetCore.Resources
 {
-    public class User
+    public class UserResource
     {
-        public int Id { get; set; }
         [Required]
         [MaxLength(50)]
         public string Username { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 }
