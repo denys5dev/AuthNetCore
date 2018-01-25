@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using AuthNetCore.Repository;
+using AuthNetCore.Repository.UserRepository;
 
 namespace AuthNetCore
 {
@@ -28,6 +29,7 @@ namespace AuthNetCore
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddAutoMapper();
+            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMvc();
         }
