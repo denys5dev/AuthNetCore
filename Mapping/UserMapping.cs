@@ -11,6 +11,9 @@ namespace AuthNetCore.Mapping
             CreateMap<User, UserResource>()
                 .ForMember(ur => ur.Username, opt => opt.MapFrom(u => u.Username))
                 .ForMember(ur => ur.Email, opt => opt.MapFrom(u => u.Email));
+            
+            CreateMap<User, UserLogin>()
+                .ForMember(ur => ur.Username, opt => opt.MapFrom(u => u.Username));
         }
     }
 }

@@ -4,7 +4,7 @@ using AuthNetCore.Repository.UserRepository;
 
 namespace AuthNetCore.Repository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IAuthRepository AuthRepository { get; }
         int Complete();
