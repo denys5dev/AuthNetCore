@@ -7,7 +7,9 @@ namespace AuthNetCore.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext _context;
-        private  AuthRepository _authRepository;
+        private IAuthRepository _authRepository;
+        private IDatingRepository _datingRepository;
+
         public UnitOfWork(DataContext context)
         {
             _context = context;
@@ -18,6 +20,14 @@ namespace AuthNetCore.Repository
             get
             {
                 return _authRepository = _authRepository ?? new AuthRepository(_context);
+            }
+        }
+
+        public IDatingRepository DatingRepository
+        {
+            get
+            {
+                return _datingRepository = _datingRepository ?? new DatingRepository(_context);
             }
         }
         public int Complete()

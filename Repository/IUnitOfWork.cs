@@ -7,6 +7,7 @@ namespace AuthNetCore.Repository
     public interface IUnitOfWork : IDisposable
     {
         IAuthRepository AuthRepository { get; }
+        IDatingRepository DatingRepository { get; }
         int Complete();
     }
 }

@@ -1,3 +1,5 @@
+using System.Linq;
+using AuthNetCore.Helpers;
 using AuthNetCore.Models;
 using AuthNetCore.Resources;
 using AutoMapper;
@@ -8,12 +10,15 @@ namespace AuthNetCore.Mapping
     {
         public UserMapping()
         {
-            CreateMap<User, UserResource>()
-                .ForMember(ur => ur.Username, opt => opt.MapFrom(u => u.Username))
-                .ForMember(ur => ur.Email, opt => opt.MapFrom(u => u.Email));
-            
-            CreateMap<User, UserLogin>()
-                .ForMember(ur => ur.Username, opt => opt.MapFrom(u => u.Username));
+            CreateMap<User, UserForListResource>()
+                .ForMember(ul => ul.PhotoUrl, opt => opt.MapFrom(u => u.Photos.FirstOrDefault(p => p.IsMain).Url))
+                .ForMember(ul => ul.Age, opt => opt.ResolveUsing(d => d.DateOfBirth.CalculateAge()));
+
+            CreateMap<User, UserForDetailsResource>()
+                .ForMember(ul => ul.PhotoUrl, opt => opt.MapFrom(u => u.Photos.FirstOrDefault(p => p.IsMain).Url))
+                .ForMember(ul => ul.Age, opt => opt.ResolveUsing(d => d.DateOfBirth.CalculateAge()));
+                
+            CreateMap<Photo, PhotoResource>();
         }
     }
 }

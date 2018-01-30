@@ -8,14 +8,15 @@ namespace AuthNetCore.Repository.UserRepository
 {
     public class AuthRepository : Repository<User>, IAuthRepository
     {
+        private readonly new DataContext _context;
         public AuthRepository(DataContext context) : base(context)
         {
-
+            _context = context;
         }
         public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
-
+            
             if (user == null)
                 return null;
 
