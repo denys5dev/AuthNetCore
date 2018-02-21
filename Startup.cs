@@ -19,6 +19,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using AuthNetCore.Helpers;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace AuthNetCore
 {
@@ -40,7 +41,8 @@ namespace AuthNetCore
             services.AddAutoMapper();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => {
+                .AddJwtBearer(options =>
+                {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
@@ -49,9 +51,15 @@ namespace AuthNetCore
                         ValidateAudience = false
                     };
                 });
-            services.AddMvc().AddJsonOptions(opt => 
+            services.AddMvc().AddJsonOptions(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
         }
 
@@ -68,12 +76,14 @@ namespace AuthNetCore
             }
             else
             {
-                app.UseExceptionHandler(builder => {
-                    builder.Run(async context => {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                         var error = context.Features.Get<IExceptionHandlerFeature>();
-                        if(error != null)
+                        if (error != null)
                         {
                             context.Response.AddApplicationError(error.Error.Message);
                             await context.Response.WriteAsync(error.Error.Message);
@@ -81,6 +91,15 @@ namespace AuthNetCore
                     });
                 });
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             // UNCOMMENT FOR SEEDING DATA !
             // seeder.SeedUsers();
