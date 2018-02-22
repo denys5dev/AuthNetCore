@@ -1,0 +1,8 @@
+@import './../../shared/styles/app/variables';
+
+header {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    background-color: $brand-info;
+}
