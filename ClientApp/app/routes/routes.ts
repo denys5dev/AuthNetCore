@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from '../layout/layout.component';
 
-// import { LoginComponent } from './pages/login/login.component';
-// import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 // import { RecoverComponent } from './pages/recover/recover.component';
 // import { LockComponent } from './pages/lock/lock.component';
 // import { MaintenanceComponent } from './pages/maintenance/maintenance.component';
@@ -30,8 +30,8 @@ export const routes : Routes = [
     },
 
     // Not lazy-loaded routes
-    // { path: 'login', component: LoginComponent },
-    // { path: 'register', component: RegisterComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     // { path: 'recover', component: RecoverComponent },
     // { path: 'lock', component: LockComponent },
     // { path: 'maintenance', component: MaintenanceComponent },
