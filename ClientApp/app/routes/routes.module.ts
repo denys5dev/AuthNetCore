@@ -7,6 +7,7 @@ import { PagesModule } from './pages/pages.module';
 
 // import { menu } from './menu';
 import { routes } from './routes';
+import { AuthService } from '../core/auth.service';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { routes } from './routes';
         PagesModule
     ],
     declarations: [],
+    providers: [AuthService],
     exports: [
         RouterModule
     ]
