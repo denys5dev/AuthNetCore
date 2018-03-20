@@ -3,7 +3,7 @@
     display: flex;
     width: 320px;
     height: 330px;
-    background-color: #fff;
+    background-color: #edf1f2;
     margin: auto;
     align-items: center;
     justify-content: center;
@@ -11,12 +11,12 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 1px solid #ba95ea;
     border-radius: 162px;
     transition: ease-in-out .5s;
     &:hover {
         box-shadow: -12px 11px 56px grey;
         transition: ease-in-out .5s;
+        background-color: white;
     }
     &__group {
         display: flex;
