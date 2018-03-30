@@ -1,13 +1,13 @@
 <nav>
     <ul class="menu">
         <li class="menu__item">
-            <a href="#" class="menu__link" title="sing in" [routerLink]="'/login'" >sign in</a>
+            <a href="#" class="menu__link" *ngIf="!_authService.isLogged()" title="sing in" [routerLink]="'/login'" >sign in</a>
         </li>
         <li class="menu__item">
-            <a href="#" class="menu__link" title="sing out" [routerLink]="'/register'" >sing up</a>
+            <a href="#" class="menu__link" *ngIf="!_authService.isLogged()" title="sing out" [routerLink]="'/register'" >sing up</a>
         </li>
         <li class="menu__item">
-            <a href="" class="menu__link">logout</a>
+            <a [href]="false" class="menu__link" *ngIf="_authService.isLogged()" (click)="logout()">logout</a>
         </li>
     </ul>
 </nav>
